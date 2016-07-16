@@ -23,7 +23,7 @@ describe OrganizationCampaign do
     end
   end
 
-  
+
   describe "Instance Methods >" do
     describe "assigned >" do
       it "returns 0 if no recipients are assigned" do
@@ -41,9 +41,9 @@ describe OrganizationCampaign do
         expect(oc.matched).to eq 0
       end
 
-      it "returns >0 if some recipients are matched" do
-        r = FactoryGirl.create :recipient, organization_campaign: oc
-        FactoryGirl.create :match, recipient: r
+      it "returns >0 if some recipients are matched", focus: true do
+        membership = FactoryGirl.create(:membership)
+        r = FactoryGirl.create :recipient, organization_campaign: oc, membership: membership
         expect(oc.matched).to eq 1
       end
     end
@@ -54,8 +54,8 @@ describe OrganizationCampaign do
       end
 
       it "returns >0 if some recipients are matched" do
-        r = FactoryGirl.create :recipient, organization_campaign: oc
-        FactoryGirl.create :match, recipient: r
+        membership = FactoryGirl.create(:membership)
+        r = FactoryGirl.create :recipient, organization_campaign: oc, membership: membership
         expect(oc.matched_pct).to eq 100
       end
     end
